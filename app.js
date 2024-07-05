@@ -3,7 +3,14 @@ let myLeads = []
 const inputEl = document.getElementById("input-el")
 const inputBtn = document.getElementById("input-btn")
 const ulEl = document.getElementById("ul-el")
+const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
 
+
+if (leadsFromLocalStorage) {
+    myLeads = leadsFromLocalStorage
+    renderLeads()
+
+}
 
 function saveLead(e) {
     if ((e.type === "click") || ( e.type === "keypress" && e.keyCode == 13)) { //Keypress not working idk why God abeg
@@ -21,9 +28,6 @@ inputBtn.addEventListener("keypress", saveLead)
 function renderLeads() {
     let listItems = ""
     for (let i = 0; i < myLeads.length; i++) {
-        // Wrap the lead in an anchor tag (<a>) inside the <li>
-        // Can you make the link open in a new tab?
-        JSON.parse(localStorage.getItem(myLeads))
         listItems += `
         <li> 
             <a href= '${myLeads[i]}' target='_blank'>
