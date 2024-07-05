@@ -5,6 +5,14 @@ const inputBtn = document.getElementById("input-btn")
 const ulEl = document.getElementById("ul-el")
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
 const deleteBtn = document.getElementById("delete-btn")
+const tabBtn = document.getElementById("tab-btn")
+
+// const tabs = [
+//     {
+//         url: "https://github.com/Tsunamiisking"
+//     }
+// ]
+
 
 if (leadsFromLocalStorage) {
     myLeads = leadsFromLocalStorage
@@ -37,6 +45,16 @@ function saveLead(e) {
 inputBtn.addEventListener("click", saveLead)
 
 inputBtn.addEventListener("keypress", saveLead)
+
+
+tabBtn.addEventListener("click", () =>{
+    chrome.tabs.query({active: true, currentWindow: true}, (tabs) => { // this line qureries chrome for the active tab in the current window (active: true, currentWindow: true) then takes a tabs parameter
+        let leadTab = tabs[0].url
+        myLeads.push(leadTab)
+        localStorage.setItem("myLeads", JSON.stringify(myLeads))
+        render(myLeads);
+    })
+})
 
 
 deleteBtn.addEventListener("dblclick", () =>{
