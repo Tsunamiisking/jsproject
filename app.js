@@ -10,6 +10,14 @@ inputBtn.addEventListener("click", function () {
     renderLeads()
 })
 
+inputBtn.addEventListener("keypress", (e) => {
+    if (e.key === 'Enter'){        
+        myLeads.push(inputEl.value)
+        inputEl.value = ""
+        renderLeads()
+    }
+
+})
 
 function renderLeads() {
     let listItems = ""
